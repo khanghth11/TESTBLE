@@ -1,0 +1,2 @@
+source D:/TofuProject/bleprph/build/bootloader/gdbinit/symbols
+source D:/TofuProject/bleprph/build/bootloader/gdbinit/connect
