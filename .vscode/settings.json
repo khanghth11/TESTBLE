@@ -1,20 +1,24 @@
 {
-    "idf.portWin": "COM3",
-    "idf.customExtraVars": {
-        "IDF_TARGET": "esp32s3"
-    },
-    "idf.openOcdConfigs": [
-        "interface/ftdi/esp32_devkitj_v1.cfg",
-        "target/esp32s3.cfg"
-    ],
-    "files.associations": {
-        "ble_svc_gatt.h": "c",
-        "string.h": "c",
-        "stdint.h": "c",
-        "bluetooth_manager.h": "c",
-        "wifi_manager.h": "c",
-        "qrcode.h": "c",
-        "esp_lcd_ssd1351.h": "c"
-    },
-    "C_Cpp.errorSquiggles": "disabled"
+  "idf.portWin": "COM4",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s3.cfg"
+  ],
+  "files.associations": {
+    "ble_svc_gatt.h": "c",
+    "string.h": "c",
+    "stdint.h": "c",
+    "bluetooth_manager.h": "c",
+    "wifi_manager.h": "c",
+    "qrcode.h": "c",
+    "esp_lcd_ssd1351.h": "c"
+  },
+  "C_Cpp.errorSquiggles": "disabled",
+  "idf.espIdfPathWin": "D:\\Users\\ACER\\esp\\v5.4.1\\esp-idf",
+  "idf.toolsPathWin": "D:\\Users\\ACER\\.espressif",
+  "idf.pythonInstallPath": "D:\\Users\\ACER\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.flashType": "UART"
 }

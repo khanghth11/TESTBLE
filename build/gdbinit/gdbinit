@@ -1,2 +1,2 @@
-source D:/TofuProject/bleprph/build/gdbinit/symbols
-source D:/TofuProject/bleprph/build/gdbinit/connect
+source D:/Company/Tofu-fw/ble-block/TESTBLE/build/gdbinit/symbols
+source D:/Company/Tofu-fw/ble-block/TESTBLE/build/gdbinit/connect

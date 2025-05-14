@@ -275,66 +275,98 @@ void wifi_manager_start_scan(void)
 }
 
 // Connect to Wifi
-void wifi_manager_connect(const char *credentials) {
-    if (!wifi_station_started) {
+void wifi_manager_connect(const char *credentials)
+{
+    if (!wifi_station_started)
+    {
+        ESP_LOGE(TAG, "WiFi station not started");
         update_wifi_status_notify(WIFI_STATUS_FAIL);
         return;
     }
 
-    const char *ssid_key = "ssid:";
-    const char *password_key = "/password:";
-
-    const char *ssid_start = strstr(credentials, ssid_key);
-    if (!ssid_start || ssid_start != credentials) {
+    // Parse JSON input
+    cJSON *root = cJSON_Parse(credentials);
+    if (root == NULL)
+    {
+        ESP_LOGE(TAG, "Failed to parse JSON credentials");
         update_wifi_status_notify(WIFI_STATUS_FAIL);
         return;
     }
-    
-    ssid_start += strlen(ssid_key);
-    const char *password_start = strstr(credentials, password_key);
-    
-    int ssid_len;
-    if (password_start) {
-        ssid_len = password_start - ssid_start;
-        password_start += strlen(password_key);
-        strncpy(saved_password, password_start, sizeof(saved_password) - 1);
+
+    // Extract SSID and password
+    cJSON *ssid_json = cJSON_GetObjectItem(root, "ssid");
+    cJSON *password_json = cJSON_GetObjectItem(root, "password");
+
+    if (!ssid_json || !cJSON_IsString(ssid_json) || strlen(ssid_json->valuestring) == 0)
+    {
+        ESP_LOGE(TAG, "Missing or invalid SSID in credentials");
+        cJSON_Delete(root);
+        update_wifi_status_notify(WIFI_STATUS_FAIL);
+        return;
+    }
+
+    // Copy SSID to saved_ssid
+    strncpy(saved_ssid, ssid_json->valuestring, sizeof(saved_ssid) - 1);
+    saved_ssid[sizeof(saved_ssid) - 1] = '\0';
+
+    // Copy password (if available) to saved_password
+    if (password_json && cJSON_IsString(password_json))
+    {
+        strncpy(saved_password, password_json->valuestring, sizeof(saved_password) - 1);
         saved_password[sizeof(saved_password) - 1] = '\0';
-    } else {
-        ssid_len = strlen(ssid_start);
-        saved_password[0] = '\0';
     }
-    if (ssid_len <= 0 || ssid_len >= sizeof(saved_ssid)) {
-        update_wifi_status_notify(WIFI_STATUS_FAIL);
-        return;
+    else
+    {
+        saved_password[0] = '\0'; // Empty password for open networks
     }
-    strncpy(saved_ssid, ssid_start, ssid_len);
-    saved_ssid[ssid_len] = '\0';
+
+    cJSON_Delete(root);
+
+    // Save credentials to NVS
     nvs_handle_t nvs_handle;
     esp_err_t err = nvs_open("wifi", NVS_READWRITE, &nvs_handle);
-    if (err == ESP_OK) {
+    if (err == ESP_OK)
+    {
         nvs_set_str(nvs_handle, "ssid", saved_ssid);
         nvs_set_str(nvs_handle, "password", saved_password);
         nvs_commit(nvs_handle);
         nvs_close(nvs_handle);
+        ESP_LOGI(TAG, "Saved WiFi credentials to NVS");
     }
-    
+    else
+    {
+        ESP_LOGE(TAG, "Failed to open NVS for WiFi credentials");
+    }
+
+    // Disconnect from any current network
     esp_wifi_disconnect();
+
+    // Configure WiFi with new credentials
     wifi_config_t wifi_config = {0};
     strncpy((char *)wifi_config.sta.ssid, saved_ssid, sizeof(wifi_config.sta.ssid) - 1);
     strncpy((char *)wifi_config.sta.password, saved_password, sizeof(wifi_config.sta.password) - 1);
-    if (strlen(saved_password) == 0) {
+
+    // Set appropriate authentication mode
+    if (strlen(saved_password) == 0)
+    {
         wifi_config.sta.threshold.authmode = WIFI_AUTH_OPEN;
-    } else {
+    }
+    else
+    {
         wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
     }
-    
+
     ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
-    
+
     wifi_is_connected = false;
     update_wifi_status_notify(WIFI_STATUS_UNKNOWN);
+
+    ESP_LOGI(TAG, "Connecting to WiFi: %s", saved_ssid);
     esp_err_t rc = esp_wifi_connect();
-    
-    if (rc != ESP_OK) {
+
+    if (rc != ESP_OK)
+    {
+        ESP_LOGE(TAG, "Failed to connect to WiFi, error: 0x%x", rc);
         update_wifi_status_notify(WIFI_STATUS_FAIL);
     }
 }
@@ -354,26 +386,33 @@ char *wifi_manager_get_saved_password(void)
 {
     return saved_password;
 }
-void wifi_manager_connect_saved(void) {
-    if (strlen(saved_ssid) > 0) {
+void wifi_manager_connect_saved(void)
+{
+    if (strlen(saved_ssid) > 0)
+    {
         ESP_LOGI(TAG, "Connecting to saved WiFi: %s", saved_ssid);
-        
+
         wifi_config_t wifi_config = {0};
         strncpy((char *)wifi_config.sta.ssid, saved_ssid, sizeof(wifi_config.sta.ssid) - 1);
         strncpy((char *)wifi_config.sta.password, saved_password, sizeof(wifi_config.sta.password) - 1);
-        
+
         // Đặt authmode phù hợp với loại mạng
-        if (strlen(saved_password) == 0) {
+        if (strlen(saved_password) == 0)
+        {
             wifi_config.sta.threshold.authmode = WIFI_AUTH_OPEN;
-        } else {
+        }
+        else
+        {
             wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
         }
-        
+
         ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
         esp_err_t result = esp_wifi_connect();
         ESP_LOGI(TAG, "WiFi connect command result: %s (0x%x)",
                  result == ESP_OK ? "SUCCESS" : "FAILED", result);
-    } else {
+    }
+    else
+    {
         ESP_LOGI(TAG, "Cannot connect to saved WiFi - missing SSID");
     }
 }

@@ -1,2 +1,2 @@
-source D:/TofuProject/bleprph/build/bootloader/gdbinit/symbols
-source D:/TofuProject/bleprph/build/bootloader/gdbinit/connect
+source D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader/gdbinit/symbols
+source D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader/gdbinit/connect

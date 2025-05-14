@@ -6,11 +6,11 @@ dependencies:
   nimble_peripheral_utils:
     dependencies: []
     source:
-      path: C:\Users\n21dc\esp\v5.4.1\esp-idf\examples\bluetooth\nimble\common\nimble_peripheral_utils
+      path: D:\Company\Tofu-fw\ble-block\TESTBLE\components\nimble_peripheral_utils
       type: local
     version: '*'
 direct_dependencies:
 - nimble_peripheral_utils
-manifest_hash: c28d41453286b749d7e5a8b76d4a8cdf22df54db4ac4384a3371eb4f67a0b54c
+manifest_hash: d96ade50fa7badf0865f3d8837854adb8cc566bc30a09136e3ba385eaa2308a8
 target: esp32s3
 version: 2.0.0

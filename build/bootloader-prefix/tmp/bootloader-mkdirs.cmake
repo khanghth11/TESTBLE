@@ -6,22 +6,22 @@ cmake_minimum_required(VERSION 3.5)
 # If CMAKE_DISABLE_SOURCE_CHANGES is set to true and the source directory is an
 # existing directory in our source tree, calling file(MAKE_DIRECTORY) on it
 # would cause a fatal error, even though it would be a no-op.
-if(NOT EXISTS "C:/Users/n21dc/esp/v5.4.1/esp-idf/components/bootloader/subproject")
-  file(MAKE_DIRECTORY "C:/Users/n21dc/esp/v5.4.1/esp-idf/components/bootloader/subproject")
+if(NOT EXISTS "D:/Users/ACER/esp/v5.4.1/esp-idf/components/bootloader/subproject")
+  file(MAKE_DIRECTORY "D:/Users/ACER/esp/v5.4.1/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "D:/TofuProject/bleprph/build/bootloader"
-  "D:/TofuProject/bleprph/build/bootloader-prefix"
-  "D:/TofuProject/bleprph/build/bootloader-prefix/tmp"
-  "D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp"
-  "D:/TofuProject/bleprph/build/bootloader-prefix/src"
-  "D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/tmp"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src"
+  "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

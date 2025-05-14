@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-D:/TofuProject/bleprph/build/CMakeFiles/bootloader
-D:/TofuProject/bleprph/build/CMakeFiles/bootloader.rule
-D:/TofuProject/bleprph/build/CMakeFiles/bootloader-complete.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-D:/TofuProject/bleprph/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/CMakeFiles/bootloader
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/CMakeFiles/bootloader.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/CMakeFiles/bootloader-complete.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Company/Tofu-fw/ble-block/TESTBLE/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

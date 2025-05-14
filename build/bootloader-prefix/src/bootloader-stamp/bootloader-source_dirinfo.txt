@@ -4,6 +4,6 @@
 
 method=source_dir
 command=
-source_dir=C:/Users/n21dc/esp/v5.4.1/esp-idf/components/bootloader/subproject
+source_dir=D:/Users/ACER/esp/v5.4.1/esp-idf/components/bootloader/subproject
 work_dir=
 
